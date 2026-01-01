@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(muli LANGUAGES C CXX VERSION 0.1.0)
 
-option(MULI_BUILD_DEMO "Build the demo project" ON)
+option(MULI_BUILD_DEMO "Build the demo project" OFF)
 
 include(GNUInstallDirs)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
