@@ -171,11 +171,7 @@ else()
 endif()
 
 if(LIB_DEP_TARGETS)
-    if(LIB_SOURCES)
-        target_link_libraries(${PROJECT_NAME} PUBLIC ${LIB_DEP_TARGETS})
-    else()
-        target_link_libraries(${PROJECT_NAME} INTERFACE ${LIB_DEP_TARGETS})
-    endif()
+    target_link_libraries(${PROJECT_NAME} PUBLIC ${LIB_DEP_TARGETS})
 endif()
 
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
