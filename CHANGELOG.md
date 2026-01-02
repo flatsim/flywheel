@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6] - 2026-01-02
+
+### <!-- 1 -->🐛 Bug Fixes
+
+- Fix library source file globbing
+- Use INTERFACE for target_link_libraries when library is header-only
+
 ## [0.0.4] - 2026-01-02
 
 ### <!-- 0 -->⛰️  Features
