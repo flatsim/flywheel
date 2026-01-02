@@ -144,7 +144,7 @@ process_deps(LIB_DEPS LIB_DEP_TARGETS)
 # ==================================================================================================
 # Main library
 # ==================================================================================================
-file(GLOB_RECURSE LIB_SOURCES CONFIGURE_DEPENDS "src/${PROJECT_NAME}/*.cpp")
+file(GLOB_RECURSE LIB_SOURCES CONFIGURE_DEPENDS "src/**/*.cpp")
 
 if(LIB_SOURCES)
     add_library(${PROJECT_NAME} STATIC ${LIB_SOURCES})
