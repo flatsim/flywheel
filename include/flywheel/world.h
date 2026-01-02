@@ -595,8 +595,8 @@ inline bool BroadPhase::QueryCallback(NodeProxy nodeB, Collider* colliderB)
 // Collider inline implementations (placed here to avoid circular dependencies)
 // ============================================================================
 
-// Defined in flywheel.cpp
-extern ContactListener defaultListener;
+// Inline global variable (C++17)
+inline ContactListener defaultListener;
 
 inline Collider::Collider()
     : OnDestroy{ nullptr }
@@ -1090,10 +1090,10 @@ inline void Island::Solve()
     }
 }
 
-// Defined in flywheel.cpp
-extern const int32 toi_postion_iteration;
-extern const int32 toi_index_1;
-extern const int32 toi_index_2;
+// Inline global constants (C++17)
+inline constexpr int32 toi_postion_iteration = 20;
+inline constexpr int32 toi_index_1 = 0;
+inline constexpr int32 toi_index_2 = 1;
 
 inline void Island::SolveTOI(float dt)
 {
@@ -3391,15 +3391,12 @@ inline void World::FreeJoint(Joint* joint)
 // Collision inline implementations
 // ============================================================================
 
-// Defined in flywheel.cpp
-extern const Vec2 origin;
+// Inline global variables (C++17)
+inline const Vec2 origin = Vec2::zero;
+inline bool detection_function_initialized = false;
 
-// These variables are defined in flywheel.cpp to avoid ODR violations
-extern bool detection_function_initialized;
-extern CollideFunction* collide_function_map[Shape::Type::shape_count][Shape::Type::shape_count];
-
-// Forward declaration
-void InitializeDetectionFunctionMap();
+// Forward declaration - implementation after collision functions are defined
+inline void InitializeDetectionFunctionMap();
 
 /*
  * Returns support point in 'Minkowski Difference' set
@@ -3899,6 +3896,26 @@ inline bool ConvexVsConvex(const Shape* a, const Transform& tfA, const Shape* b,
     return true;
 }
 
+// Initialize the collision detection function map
+inline void InitializeDetectionFunctionMap()
+{
+    if (detection_function_initialized)
+    {
+        return;
+    }
+
+    collide_function_map[Shape::Type::circle][Shape::Type::circle] = &CircleVsCircle;
+
+    collide_function_map[Shape::Type::capsule][Shape::Type::circle] = &CapsuleVsCircle;
+    collide_function_map[Shape::Type::capsule][Shape::Type::capsule] = &ConvexVsConvex;
+
+    collide_function_map[Shape::Type::polygon][Shape::Type::circle] = &PolygonVsCircle;
+    collide_function_map[Shape::Type::polygon][Shape::Type::capsule] = &ConvexVsConvex;
+    collide_function_map[Shape::Type::polygon][Shape::Type::polygon] = &ConvexVsConvex;
+
+    detection_function_initialized = true;
+}
+
 inline bool Collide(const Shape* a, const Transform& tfA, const Shape* b, const Transform& tfB, ContactManifold* manifold)
 {
     if (detection_function_initialized == false)
@@ -3932,13 +3949,9 @@ inline bool Collide(const Shape* a, const Transform& tfA, const Shape* b, const 
     }
 }
 
-// InitializeDetectionFunctionMap is defined in flywheel.cpp (not inline to avoid ODR issues)
-
 // ============================================================================
 // Raycast inline implementations
 // ============================================================================
-
-extern SupportPoint CSOSupport(const Shape* a, const Transform& tfA, const Shape* b, const Transform& tfB, const Vec2& dir);
 
 inline bool ShapeCast(
     const Shape* a,
