@@ -27,6 +27,15 @@
 namespace flywheel
 {
 
+// Joint destructor implementation (placed here after callbacks.h is included to avoid circular dependency)
+inline Joint::~Joint()
+{
+    if (OnDestroy)
+    {
+        OnDestroy->OnJointDestroy(this);
+    }
+}
+
 class World
 {
 public:

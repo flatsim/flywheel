@@ -69,7 +69,7 @@ public:
     };
 
     // clang-format off
-    Joint(
+    inline Joint(
         Joint::Type type,
         RigidBody* bodyA,
         RigidBody* bodyB,
@@ -78,7 +78,7 @@ public:
         float jointMass
     );
     // clang-format on
-    virtual ~Joint();
+    virtual inline ~Joint();
 
     virtual bool SolvePositionConstraints(const Timestep& step) override
     {
@@ -93,7 +93,7 @@ public:
     float GetJointMass() const;
     void SetJointMass(float jointMass);
 
-    void SetParameters(float jointFrequency, float jointDampingRatio, float jointMass);
+    inline void SetParameters(float jointFrequency, float jointDampingRatio, float jointMass);
 
     bool IsSolid() const;
     Joint::Type GetType() const;
@@ -111,7 +111,7 @@ public:
 protected:
     Joint::Type type;
 
-    void ComputeBetaAndGamma(const Timestep& step);
+    inline void ComputeBetaAndGamma(const Timestep& step);
 
 private:
     // Following parameters are used to soften the joint
@@ -131,6 +131,58 @@ private:
 
     bool flagIsland;
 };
+
+inline Joint::Joint(
+    Joint::Type type, RigidBody* bodyA, RigidBody* bodyB, float jointFrequency, float jointDampingRatio, float jointMass
+)
+    : Constraint(bodyA, bodyB)
+    , OnDestroy{ nullptr }
+    , UserData{ nullptr }
+    , type{ type }
+    , flagIsland{ false }
+{
+    SetParameters(jointFrequency, jointDampingRatio, jointMass);
+}
+
+inline void Joint::SetParameters(float newJointFrequency, float newJointDampingRatio, float newJointMass)
+{
+    // 0 < Frequency
+    // 0 <= Damping ratio <= 1
+    // 0 < Mass
+
+    if (newJointFrequency > 0.0f)
+    {
+        jointFrequency = newJointFrequency;
+        jointDampingRatio = Clamp(newJointDampingRatio, 0.0f, 1.0f);
+        jointMass = Clamp(newJointMass, epsilon, max_value);
+    }
+    else
+    {
+        jointFrequency = -1.0f;
+        jointDampingRatio = 0.0f;
+        jointMass = 0.0f;
+    }
+}
+
+inline void Joint::ComputeBetaAndGamma(const Timestep& step)
+{
+    // If the frequency is less than or equal to zero, make this joint solid
+    if (jointFrequency <= 0.0f)
+    {
+        beta = 1.0f;
+        gamma = 0.0f;
+    }
+    else
+    {
+        float omega = 2.0f * pi * jointFrequency;
+        float d = 2.0f * jointMass * jointDampingRatio * omega; // Damping coefficient
+        float k = jointMass * omega * omega;                    // Spring constant
+        float h = step.dt;
+
+        beta = h * k / (d + h * k);
+        gamma = 1.0f / ((d + h * k) * h);
+    }
+}
 
 inline float Joint::GetJointFrequency() const
 {
@@ -196,5 +248,8 @@ inline bool Joint::IsEnabled() const
 {
     return bodyA->IsEnabled() || bodyB->IsEnabled();
 }
+
+// Note: Joint destructor implementation is in world.h after callbacks.h is included
+// to avoid circular dependency issues
 
 } // namespace flywheel
