@@ -1,5 +1,4 @@
 #include "flywheel/world.h"
-#include <cstdio>
 
 namespace flywheel
 {
@@ -12,22 +11,16 @@ const int32 toi_index_2 = 1;
 
 ContactListener defaultListener;
 
+bool block_solve = true;
 bool detection_function_initialized = false;
 CollideFunction* collide_function_map[Shape::Type::shape_count][Shape::Type::shape_count] = {};
 
 void InitializeDetectionFunctionMap()
 {
-    fprintf(stderr, "[DEBUG flywheel.cpp] InitializeDetectionFunctionMap called\n");
-    fprintf(stderr, "[DEBUG flywheel.cpp] &detection_function_initialized = %p\n", (void*)&detection_function_initialized);
-    fprintf(stderr, "[DEBUG flywheel.cpp] detection_function_initialized = %d\n", detection_function_initialized);
-
     if (detection_function_initialized)
     {
-        fprintf(stderr, "[DEBUG flywheel.cpp] Already initialized, returning\n");
         return;
     }
-
-    fprintf(stderr, "[DEBUG flywheel.cpp] Initializing collision function map...\n");
 
     collide_function_map[Shape::Type::circle][Shape::Type::circle] = &CircleVsCircle;
 
@@ -39,10 +32,6 @@ void InitializeDetectionFunctionMap()
     collide_function_map[Shape::Type::polygon][Shape::Type::polygon] = &ConvexVsConvex;
 
     detection_function_initialized = true;
-    fprintf(
-        stderr, "[DEBUG flywheel.cpp] Initialization complete, detection_function_initialized=%d\n",
-        detection_function_initialized
-    );
 }
 
 } // namespace flywheel

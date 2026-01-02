@@ -115,7 +115,8 @@ public:
 namespace flywheel
 {
 
-inline bool block_solve = true;
+// Defined in flywheel.cpp
+extern bool block_solve;
 extern CollideFunction* collide_function_map[Shape::Type::shape_count][Shape::Type::shape_count];
 
 inline Contact::Contact(Collider* colliderA, Collider* colliderB)

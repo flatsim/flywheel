@@ -1,5 +1,9 @@
 #pragma once
 
+// Island solver configuration
+#define SOLVE_CONTACTS_BACKWARD 1
+#define SOLVE_CONTACT_CONSTRAINT 1
+
 #include "common.h"
 #include "math.h"
 
