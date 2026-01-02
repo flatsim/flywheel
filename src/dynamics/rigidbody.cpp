@@ -1,11 +1,11 @@
-#include "muli/rigidbody.h"
-#include "muli/capsule.h"
-#include "muli/circle.h"
-#include "muli/collider.h"
-#include "muli/polygon.h"
-#include "muli/world.h"
+#include "flywheel/rigidbody.h"
+#include "flywheel/capsule.h"
+#include "flywheel/circle.h"
+#include "flywheel/collider.h"
+#include "flywheel/polygon.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 RigidBody::RigidBody(const Transform& tf, RigidBody::Type type)
@@ -523,4 +523,4 @@ void RigidBody::SynchronizeColliders()
     }
 }
 
-} // namespace muli
+} // namespace flywheel

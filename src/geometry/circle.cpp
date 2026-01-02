@@ -1,6 +1,6 @@
-#include "muli/circle.h"
+#include "flywheel/circle.h"
 
-namespace muli
+namespace flywheel
 {
 
 Circle::Circle(float radius, const Transform& tf)
@@ -85,4 +85,4 @@ bool Circle::RayCast(const Transform& transform, const RayCastInput& input, RayC
     return false;
 }
 
-} // namespace muli
+} // namespace flywheel

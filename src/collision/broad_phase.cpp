@@ -1,8 +1,8 @@
-#include "muli/broad_phase.h"
-#include "muli/contact_graph.h"
-#include "muli/world.h"
+#include "flywheel/broad_phase.h"
+#include "flywheel/contact_graph.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 BroadPhase::BroadPhase(ContactGraph* contactGraph)
@@ -10,12 +10,12 @@ BroadPhase::BroadPhase(ContactGraph* contactGraph)
     , moveCapacity{ 16 }
     , moveCount{ 0 }
 {
-    moveBuffer = (NodeProxy*)muli::Alloc(moveCapacity * sizeof(NodeProxy));
+    moveBuffer = (NodeProxy*)flywheel::Alloc(moveCapacity * sizeof(NodeProxy));
 }
 
 BroadPhase::~BroadPhase()
 {
-    muli::Free(moveBuffer);
+    flywheel::Free(moveBuffer);
 }
 
 void BroadPhase::BufferMove(NodeProxy node)
@@ -25,9 +25,9 @@ void BroadPhase::BufferMove(NodeProxy node)
     {
         NodeProxy* old = moveBuffer;
         moveCapacity *= 2;
-        moveBuffer = (NodeProxy*)muli::Alloc(moveCapacity * sizeof(NodeProxy));
+        moveBuffer = (NodeProxy*)flywheel::Alloc(moveCapacity * sizeof(NodeProxy));
         memcpy(moveBuffer, old, moveCount * sizeof(NodeProxy));
-        muli::Free(old);
+        flywheel::Free(old);
     }
 
     moveBuffer[moveCount] = node;
@@ -147,4 +147,4 @@ bool BroadPhase::QueryCallback(NodeProxy nodeB, Collider* colliderB)
     return true;
 }
 
-} // namespace muli
+} // namespace flywheel

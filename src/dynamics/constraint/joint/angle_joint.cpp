@@ -1,7 +1,7 @@
-#include "muli/angle_joint.h"
-#include "muli/world.h"
+#include "flywheel/angle_joint.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 AngleJoint::AngleJoint(
@@ -106,4 +106,4 @@ void AngleJoint::ApplyImpulse(float lambda)
     bodyB->angularVelocity += lambda * bodyB->invInertia;
 }
 
-} // namespace muli
+} // namespace flywheel

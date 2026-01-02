@@ -1,11 +1,11 @@
-#include "muli/world.h"
-#include "muli/capsule.h"
-#include "muli/circle.h"
-#include "muli/island.h"
-#include "muli/polygon.h"
-#include "muli/time_of_impact.h"
+#include "flywheel/world.h"
+#include "flywheel/capsule.h"
+#include "flywheel/circle.h"
+#include "flywheel/island.h"
+#include "flywheel/polygon.h"
+#include "flywheel/time_of_impact.h"
 
-namespace muli
+namespace flywheel
 {
 
 World::World(const WorldSettings& settings)
@@ -1698,4 +1698,4 @@ void World::FreeJoint(Joint* joint)
     }
 }
 
-} // namespace muli
+} // namespace flywheel

@@ -1,6 +1,6 @@
-#include "muli/math.h"
+#include "flywheel/math.h"
 
-namespace muli
+namespace flywheel
 {
 
 // https://math.stackexchange.com/questions/893984/conversion-of-rotation-matrix-to-quaternion
@@ -281,4 +281,4 @@ Mat4 Mat4::GetInverse()
     return t;
 }
 
-} // namespace muli
+} // namespace flywheel

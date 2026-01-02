@@ -1,7 +1,7 @@
-#include "muli/contact_graph.h"
-#include "muli/world.h"
+#include "flywheel/contact_graph.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 extern void InitializeDetectionFunctionMap();
@@ -223,4 +223,4 @@ void ContactGraph::UpdateCollider(Collider* collider, const Transform& tf0, cons
     broadPhase.Update(collider, AABB::Union(aabb0, aabb1), prediction);
 }
 
-} // namespace muli
+} // namespace flywheel

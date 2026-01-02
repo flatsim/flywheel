@@ -1,9 +1,9 @@
-#include "muli/island.h"
+#include "flywheel/island.h"
 
 #define SOLVE_CONTACTS_BACKWARD 1
 #define SOLVE_CONTACT_CONSTRAINT 1
 
-namespace muli
+namespace flywheel
 {
 
 Island::Island(World* world, int32 bodyCapacity, int32 contactCapacity, int32 jointCapacity)
@@ -310,4 +310,4 @@ void Island::SolveTOI(float dt)
     }
 }
 
-} // namespace muli
+} // namespace flywheel

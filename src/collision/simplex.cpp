@@ -1,6 +1,6 @@
-#include "muli/simplex.h"
+#include "flywheel/simplex.h"
 
-namespace muli
+namespace flywheel
 {
 
 Vec2 Simplex::GetSearchDirection() const
@@ -221,4 +221,4 @@ void Simplex::Advance(const Vec2& q)
     };
 }
 
-} // namespace muli
+} // namespace flywheel

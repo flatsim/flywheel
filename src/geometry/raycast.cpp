@@ -1,8 +1,8 @@
-#include "muli/raycast.h"
-#include "muli/collision.h"
-#include "muli/shape.h"
+#include "flywheel/raycast.h"
+#include "flywheel/collision.h"
+#include "flywheel/shape.h"
 
-namespace muli
+namespace flywheel
 {
 
 // https://stackoverflow.com/questions/1073336/circle-line-segment-collision-detection-algorithm
@@ -421,4 +421,4 @@ bool ShapeCast(
     return true;
 }
 
-} // namespace muli
+} // namespace flywheel

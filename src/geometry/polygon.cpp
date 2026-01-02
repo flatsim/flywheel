@@ -1,7 +1,7 @@
-#include "muli/polygon.h"
-#include "muli/geometry.h"
+#include "flywheel/polygon.h"
+#include "flywheel/geometry.h"
 
-namespace muli
+namespace flywheel
 {
 
 extern void ComputeConvexHull(const Vec2* vertices, int32 vertexCount, Vec2* outVertices, int32* outVertexCount);
@@ -11,8 +11,8 @@ Polygon::Polygon(const Vec2* inVertices, int32 inVertexCount, bool resetPosition
 {
     if (inVertexCount > max_local_polygon_vertices)
     {
-        vertices = (Vec2*)muli::Alloc(inVertexCount * sizeof(Vec2));
-        normals = (Vec2*)muli::Alloc(inVertexCount * sizeof(Vec2));
+        vertices = (Vec2*)flywheel::Alloc(inVertexCount * sizeof(Vec2));
+        normals = (Vec2*)flywheel::Alloc(inVertexCount * sizeof(Vec2));
     }
     else
     {
@@ -101,8 +101,8 @@ Polygon::~Polygon()
 {
     if (vertices != localVertices)
     {
-        muli::Free(vertices);
-        muli::Free(normals);
+        flywheel::Free(vertices);
+        flywheel::Free(normals);
     }
 }
 
@@ -531,4 +531,4 @@ bool Polygon::RayCast(const Transform& transform, const RayCastInput& input, Ray
     return false;
 }
 
-} // namespace muli
+} // namespace flywheel

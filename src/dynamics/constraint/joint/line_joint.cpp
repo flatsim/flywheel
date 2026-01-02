@@ -1,7 +1,7 @@
-#include "muli/line_joint.h"
-#include "muli/world.h"
+#include "flywheel/line_joint.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 LineJoint::LineJoint(
@@ -98,4 +98,4 @@ void LineJoint::ApplyImpulse(float lambda)
     bodyB->angularVelocity += lambda * sb * bodyB->invInertia;
 }
 
-} // namespace muli
+} // namespace flywheel

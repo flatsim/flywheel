@@ -1,7 +1,7 @@
-#include "muli/distance_joint.h"
-#include "muli/world.h"
+#include "flywheel/distance_joint.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 DistanceJoint::DistanceJoint(
@@ -128,4 +128,4 @@ void DistanceJoint::ApplyImpulse(float lambda)
     bodyB->angularVelocity += Dot(d, Cross(lambda, rb)) * bodyB->invInertia;
 }
 
-} // namespace muli
+} // namespace flywheel

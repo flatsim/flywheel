@@ -1,12 +1,12 @@
-#include "muli/collision.h"
-#include "muli/capsule.h"
-#include "muli/circle.h"
-#include "muli/polygon.h"
-#include "muli/polytope.h"
-#include "muli/rigidbody.h"
-#include "muli/shape.h"
+#include "flywheel/collision.h"
+#include "flywheel/capsule.h"
+#include "flywheel/circle.h"
+#include "flywheel/polygon.h"
+#include "flywheel/polytope.h"
+#include "flywheel/rigidbody.h"
+#include "flywheel/shape.h"
 
-namespace muli
+namespace flywheel
 {
 
 static constexpr Vec2 origin = Vec2::zero;
@@ -563,4 +563,4 @@ void InitializeDetectionFunctionMap()
     detection_function_initialized = true;
 }
 
-} // namespace muli
+} // namespace flywheel

@@ -1,7 +1,7 @@
-#include "muli/motor_joint.h"
-#include "muli/world.h"
+#include "flywheel/motor_joint.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 MotorJoint::MotorJoint(
@@ -136,4 +136,4 @@ void MotorJoint::ApplyImpulse(const Vec2& lambda0, float lambda1)
 #endif
 }
 
-} // namespace muli
+} // namespace flywheel

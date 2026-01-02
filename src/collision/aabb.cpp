@@ -1,6 +1,6 @@
-#include "muli/aabb.h"
+#include "flywheel/aabb.h"
 
-namespace muli
+namespace flywheel
 {
 
 // Slab method
@@ -62,4 +62,4 @@ float AABB::RayCast(const Vec2& from, const Vec2& to, float tMin, float tMax, Ve
     return tMin;
 }
 
-} // namespace muli
+} // namespace flywheel

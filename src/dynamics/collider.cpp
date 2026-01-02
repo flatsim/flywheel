@@ -1,11 +1,11 @@
-#include "muli/collider.h"
-#include "muli/aabb_tree.h"
-#include "muli/callbacks.h"
-#include "muli/capsule.h"
-#include "muli/circle.h"
-#include "muli/polygon.h"
+#include "flywheel/collider.h"
+#include "flywheel/aabb_tree.h"
+#include "flywheel/callbacks.h"
+#include "flywheel/capsule.h"
+#include "flywheel/circle.h"
+#include "flywheel/polygon.h"
 
-namespace muli
+namespace flywheel
 {
 
 ContactListener defaultListener;
@@ -63,4 +63,4 @@ void Collider::Destroy(Allocator* allocator)
     shape = nullptr;
 }
 
-} // namespace muli
+} // namespace flywheel

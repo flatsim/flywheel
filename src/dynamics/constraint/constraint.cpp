@@ -1,7 +1,7 @@
-#include "muli/constraint.h"
-#include "muli/world.h"
+#include "flywheel/constraint.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 Constraint::Constraint(RigidBody* bodyA, RigidBody* bodyB)
@@ -13,4 +13,4 @@ Constraint::Constraint(RigidBody* bodyA, RigidBody* bodyB)
     MuliAssert(bodyA->GetWorld() == bodyB->GetWorld());
 }
 
-} // namespace muli
+} // namespace flywheel

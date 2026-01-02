@@ -1,6 +1,6 @@
-#include "muli/polytope.h"
+#include "flywheel/polytope.h"
 
-namespace muli
+namespace flywheel
 {
 
 // Returns the edge closest to the Origin (0, 0)
@@ -36,4 +36,4 @@ PolytopeEdge Polytope::GetClosestEdge() const
     return PolytopeEdge{ minIndex, minDistance, minNormal };
 }
 
-} // namespace muli
+} // namespace flywheel

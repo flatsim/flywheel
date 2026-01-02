@@ -1,7 +1,7 @@
-#include "muli/grab_joint.h"
-#include "muli/world.h"
+#include "flywheel/grab_joint.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 GrabJoint::GrabJoint(
@@ -73,4 +73,4 @@ void GrabJoint::ApplyImpulse(const Vec2& lambda)
     bodyA->angularVelocity += bodyA->invInertia * Cross(r, lambda);
 }
 
-} // namespace muli
+} // namespace flywheel

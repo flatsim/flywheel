@@ -1,7 +1,7 @@
-#include "muli/time_of_impact.h"
-#include "muli/settings.h"
+#include "flywheel/time_of_impact.h"
+#include "flywheel/settings.h"
 
-namespace muli
+namespace flywheel
 {
 
 struct SeparationFunction
@@ -418,4 +418,4 @@ void ComputeTimeOfImpact(const Shape* shapeA, Motion motionA, const Shape* shape
     }
 }
 
-} // namespace muli
+} // namespace flywheel

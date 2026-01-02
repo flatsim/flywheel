@@ -1,0 +1,62 @@
+#pragma once
+
+#include "common.h"
+#include "joint.h"
+#include "math.h"
+
+namespace flywheel
+{
+
+class PrismaticJoint : public Joint
+{
+public:
+    PrismaticJoint(
+        RigidBody* bodyA,
+        RigidBody* bodyB,
+        const Vec2& anchor,
+        const Vec2& dir,
+        float frequency,
+        float dampingRatio,
+        float jointMass
+    );
+
+    virtual void Prepare(const Timestep& step) override;
+    virtual void SolveVelocityConstraints(const Timestep& step) override;
+
+    const Vec2& GetLocalAnchorA() const;
+    const Vec2& GetLocalAnchorB() const;
+    float GetAngleOffset() const;
+
+private:
+    Vec2 localAnchorA;
+    Vec2 localAnchorB;
+    Vec2 localYAxis;
+    float angleOffset;
+
+    Vec2 t; // perpendicular vector
+    float sa;
+    float sb;
+    Mat2 m;
+
+    Vec2 bias;
+    Vec2 impulseSum;
+
+    void ApplyImpulse(const Vec2& lambda);
+};
+
+inline const Vec2& PrismaticJoint::GetLocalAnchorA() const
+{
+    return localAnchorA;
+}
+
+inline const Vec2& PrismaticJoint::GetLocalAnchorB() const
+{
+    return localAnchorB;
+}
+
+inline float PrismaticJoint::GetAngleOffset() const
+{
+    return angleOffset;
+}
+
+} // namespace flywheel

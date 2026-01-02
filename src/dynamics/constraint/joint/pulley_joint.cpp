@@ -1,7 +1,7 @@
-#include "muli/pulley_joint.h"
-#include "muli/world.h"
+#include "flywheel/pulley_joint.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 PulleyJoint::PulleyJoint(
@@ -120,4 +120,4 @@ void PulleyJoint::ApplyImpulse(float lambda)
     bodyB->angularVelocity += Cross(rb, pb) * bodyB->invInertia;
 }
 
-} // namespace muli
+} // namespace flywheel

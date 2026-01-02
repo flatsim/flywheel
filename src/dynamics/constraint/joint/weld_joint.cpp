@@ -1,7 +1,7 @@
-#include "muli/weld_joint.h"
-#include "muli/world.h"
+#include "flywheel/weld_joint.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 // Revolute joint + Angle joint
@@ -112,4 +112,4 @@ void WeldJoint::ApplyImpulse(const Vec3& lambda)
 #endif
 }
 
-} // namespace muli
+} // namespace flywheel

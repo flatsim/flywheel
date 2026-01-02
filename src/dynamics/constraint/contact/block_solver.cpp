@@ -1,7 +1,7 @@
-#include "muli/contact.h"
-#include "muli/contact_solver.h"
+#include "flywheel/contact.h"
+#include "flywheel/contact_solver.h"
 
-namespace muli
+namespace flywheel
 {
 
 void BlockSolver::Prepare(const Contact* c)
@@ -194,4 +194,4 @@ solved:
     nc2->impulse = x.y;
 }
 
-} // namespace muli
+} // namespace flywheel

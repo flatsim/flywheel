@@ -1,7 +1,7 @@
-#include "muli/aabb_tree.h"
-#include "muli/growable_array.h"
+#include "flywheel/aabb_tree.h"
+#include "flywheel/growable_array.h"
 
-namespace muli
+namespace flywheel
 {
 
 AABBTree::AABBTree()
@@ -9,7 +9,7 @@ AABBTree::AABBTree()
     , nodeCapacity{ 32 }
     , nodeCount{ 0 }
 {
-    nodes = (Node*)muli::Alloc(nodeCapacity * sizeof(Node));
+    nodes = (Node*)flywheel::Alloc(nodeCapacity * sizeof(Node));
     memset(nodes, 0, nodeCapacity * sizeof(Node));
 
     // Build a linked list for the free list.
@@ -26,7 +26,7 @@ AABBTree::AABBTree()
 
 AABBTree::~AABBTree()
 {
-    muli::Free(nodes);
+    flywheel::Free(nodes);
     root = nullNode;
     nodeCount = 0;
 }
@@ -649,10 +649,10 @@ NodeProxy AABBTree::AllocateNode()
         // Grow the node pool
         Node* oldNodes = nodes;
         nodeCapacity += nodeCapacity / 2;
-        nodes = (Node*)muli::Alloc(nodeCapacity * sizeof(Node));
+        nodes = (Node*)flywheel::Alloc(nodeCapacity * sizeof(Node));
         memcpy(nodes, oldNodes, nodeCount * sizeof(Node));
         memset(nodes + nodeCount, 0, (nodeCapacity - nodeCount) * sizeof(Node));
-        muli::Free(oldNodes);
+        flywheel::Free(oldNodes);
 
         // Build a linked list for the free list.
         for (int32 i = nodeCount; i < nodeCapacity - 1; ++i)
@@ -693,7 +693,7 @@ void AABBTree::Rebuild()
 {
     // Rebuild tree with bottom up approach
 
-    NodeIndex* leaves = (NodeIndex*)muli::Alloc(nodeCount * sizeof(NodeIndex));
+    NodeIndex* leaves = (NodeIndex*)flywheel::Alloc(nodeCount * sizeof(NodeIndex));
     int32 count = 0;
 
     // Collect all leaves
@@ -770,7 +770,7 @@ void AABBTree::Rebuild()
     }
 
     root = leaves[0];
-    muli::Free(leaves);
+    flywheel::Free(leaves);
 }
 
-} // namespace muli
+} // namespace flywheel

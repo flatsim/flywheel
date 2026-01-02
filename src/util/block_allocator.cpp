@@ -1,6 +1,6 @@
-#include "muli/block_allocator.h"
+#include "flywheel/block_allocator.h"
 
-namespace muli
+namespace flywheel
 {
 
 BlockAllocator::BlockAllocator(int32 initialChunkSize)
@@ -29,7 +29,7 @@ void* BlockAllocator::Allocate(int32 size)
     }
     if (size > max_block_size)
     {
-        return muli::Alloc(size);
+        return flywheel::Alloc(size);
     }
 
     MuliAssert(0 < size && size <= max_block_size);
@@ -56,7 +56,7 @@ void* BlockAllocator::Allocate(int32 size)
         int32 chunkSize = chunkSizes[index];
         int32 blockCapacity = chunkSize / blockSize;
 
-        Block* blocks = (Block*)muli::Alloc(chunkSize);
+        Block* blocks = (Block*)flywheel::Alloc(chunkSize);
 
         // Build a linked list for the free list.
         for (int32 i = 0; i < blockCapacity - 1; ++i)
@@ -68,7 +68,7 @@ void* BlockAllocator::Allocate(int32 size)
         Block* last = (Block*)((int8*)blocks + blockSize * (blockCapacity - 1));
         last->next = nullptr;
 
-        Chunk* newChunk = (Chunk*)muli::Alloc(sizeof(Chunk));
+        Chunk* newChunk = (Chunk*)flywheel::Alloc(sizeof(Chunk));
         newChunk->capacity = blockCapacity;
         newChunk->blockSize = blockSize;
         newChunk->blocks = blocks;
@@ -95,7 +95,7 @@ void BlockAllocator::Free(void* p, int32 size)
 
     if (size > max_block_size)
     {
-        muli::Free(p);
+        flywheel::Free(p);
         return;
     }
 
@@ -155,8 +155,8 @@ void BlockAllocator::Clear()
     {
         Chunk* c0 = chunk;
         chunk = c0->next;
-        muli::Free(c0->blocks);
-        muli::Free(c0);
+        flywheel::Free(c0->blocks);
+        flywheel::Free(c0);
     }
 
     blockCount = 0;
@@ -186,4 +186,4 @@ int32 BlockAllocator::GetChunkSize(int32 size) const
     return chunkSizes[index];
 }
 
-} // namespace muli
+} // namespace flywheel

@@ -1,10 +1,10 @@
-#include "muli/contact.h"
-#include "muli/callbacks.h"
-#include "muli/contact_solver.h"
-#include "muli/settings.h"
-#include "muli/world.h"
+#include "flywheel/contact.h"
+#include "flywheel/callbacks.h"
+#include "flywheel/contact_solver.h"
+#include "flywheel/settings.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 bool block_solve = true;
@@ -214,4 +214,4 @@ bool Contact::SolveTOIPositionConstraints()
     return solved;
 }
 
-} // namespace muli
+} // namespace flywheel

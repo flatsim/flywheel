@@ -1,8 +1,8 @@
-#include "muli/position_solver.h"
-#include "muli/contact.h"
-#include "muli/world.h"
+#include "flywheel/position_solver.h"
+#include "flywheel/contact.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 void PositionSolver::Prepare(Contact* inContact, int32 index)
@@ -100,4 +100,4 @@ bool PositionSolver::SolveTOI()
     return -separation <= toi_position_solver_threshold;
 }
 
-} // namespace muli
+} // namespace flywheel

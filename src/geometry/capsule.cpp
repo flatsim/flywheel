@@ -1,6 +1,6 @@
-#include "muli/capsule.h"
+#include "flywheel/capsule.h"
 
-namespace muli
+namespace flywheel
 {
 
 Capsule::Capsule(float length, float radius, bool horizontal, const Transform& tf)
@@ -355,4 +355,4 @@ bool Capsule::RayCast(const Transform& transform, const RayCastInput& input, Ray
     return true;
 }
 
-} // namespace muli
+} // namespace flywheel

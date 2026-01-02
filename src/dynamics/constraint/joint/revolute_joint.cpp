@@ -1,7 +1,7 @@
-#include "muli/revolute_joint.h"
-#include "muli/world.h"
+#include "flywheel/revolute_joint.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 RevoluteJoint::RevoluteJoint(
@@ -80,4 +80,4 @@ void RevoluteJoint::ApplyImpulse(const Vec2& lambda)
     bodyB->angularVelocity += bodyB->invInertia * Cross(rb, lambda);
 }
 
-} // namespace muli
+} // namespace flywheel

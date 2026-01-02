@@ -1,7 +1,7 @@
-#include "muli/prismatic_joint.h"
-#include "muli/world.h"
+#include "flywheel/prismatic_joint.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 // TODO: Implement limit constraint
@@ -109,4 +109,4 @@ void PrismaticJoint::ApplyImpulse(const Vec2& lambda)
     bodyB->angularVelocity += (lambda.x * sb + lambda.y) * bodyB->invInertia;
 }
 
-} // namespace muli
+} // namespace flywheel

@@ -1,8 +1,8 @@
-#include "muli/contact_solver.h"
-#include "muli/contact.h"
-#include "muli/world.h"
+#include "flywheel/contact_solver.h"
+#include "flywheel/contact.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 void ContactSolverNormal::Prepare(const Contact* c, const Vec2& normal, int32 index, const Timestep& step)
@@ -165,4 +165,4 @@ void ContactSolverTangent::Solve(Contact* c, const ContactSolverNormal* normalCo
     c->b2->angularVelocity += c->b2->invInertia * j.wb * lambda;
 }
 
-} // namespace muli
+} // namespace flywheel

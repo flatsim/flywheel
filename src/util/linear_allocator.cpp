@@ -1,6 +1,6 @@
-#include "muli/linear_allocator.h"
+#include "flywheel/linear_allocator.h"
 
-namespace muli
+namespace flywheel
 {
 
 LinearAllocator::LinearAllocator(int32 initialCapacity)
@@ -20,8 +20,8 @@ LinearAllocator::~LinearAllocator()
 {
     assert(index == 0 && entryCount == 0);
 
-    muli::Free(entries);
-    muli::Free(mem);
+    flywheel::Free(entries);
+    flywheel::Free(mem);
 }
 
 void* LinearAllocator::Allocate(int32 size)
@@ -34,7 +34,7 @@ void* LinearAllocator::Allocate(int32 size)
         entries = (MemoryEntry*)malloc(entryCapacity * sizeof(MemoryEntry));
         memcpy(entries, old, entryCount * sizeof(MemoryEntry));
         memset(entries + entryCount, 0, (entryCapacity - entryCount) * sizeof(MemoryEntry));
-        muli::Free(old);
+        flywheel::Free(old);
     }
 
     MemoryEntry* entry = entries + entryCount;
@@ -74,7 +74,7 @@ void LinearAllocator::Free(void* p, int32 size)
 
     if (entry->mallocUsed)
     {
-        muli::Free(p);
+        flywheel::Free(p);
     }
     else
     {
@@ -97,7 +97,7 @@ bool LinearAllocator::GrowMemory()
     }
 
     // Grow memory by half
-    muli::Free(mem);
+    flywheel::Free(mem);
     capacity += capacity / 2;
     mem = (int8*)malloc(capacity);
     memset(mem, 0, capacity);
@@ -113,4 +113,4 @@ void LinearAllocator::Clear()
     maxAllocation = 0;
 }
 
-} // namespace muli
+} // namespace flywheel

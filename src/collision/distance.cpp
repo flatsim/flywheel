@@ -1,6 +1,6 @@
-#include "muli/distance.h"
+#include "flywheel/distance.h"
 
-namespace muli
+namespace flywheel
 {
 
 float GetClosestFeatures(const Shape* a, const Transform& tfA, const Shape* b, const Transform& tfB, ClosestFeatures* features)
@@ -58,4 +58,4 @@ float ComputeDistance(const Shape* a, const Transform& tfA, const Shape* b, cons
     return gjkResult.distance - radii;
 }
 
-} // namespace muli
+} // namespace flywheel

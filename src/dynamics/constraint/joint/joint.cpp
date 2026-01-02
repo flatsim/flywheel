@@ -1,8 +1,8 @@
-#include "muli/joint.h"
-#include "muli/callbacks.h"
-#include "muli/world.h"
+#include "flywheel/joint.h"
+#include "flywheel/callbacks.h"
+#include "flywheel/world.h"
 
-namespace muli
+namespace flywheel
 {
 
 Joint::Joint(Joint::Type type, RigidBody* bodyA, RigidBody* bodyB, float jointFrequency, float jointDampingRatio, float jointMass)
@@ -63,4 +63,4 @@ void Joint::ComputeBetaAndGamma(const Timestep& step)
     }
 }
 
-} // namespace muli
+} // namespace flywheel

@@ -1,6 +1,6 @@
-#include "muli/stack_allocator.h"
+#include "flywheel/stack_allocator.h"
 
-namespace muli
+namespace flywheel
 {
 
 StackAllocator::StackAllocator()
@@ -25,7 +25,7 @@ void* StackAllocator::Allocate(int32 size)
 
     if (index + size > stack_size)
     {
-        entry->data = (int8*)muli::Alloc(size);
+        entry->data = (int8*)flywheel::Alloc(size);
         entry->mallocUsed = true;
     }
     else
@@ -57,7 +57,7 @@ void StackAllocator::Free(void* p, int32 size)
 
     if (entry->mallocUsed)
     {
-        muli::Free(p);
+        flywheel::Free(p);
     }
     else
     {
@@ -76,4 +76,4 @@ void StackAllocator::Clear()
     entryCount = 0;
 }
 
-} // namespace muli
+} // namespace flywheel

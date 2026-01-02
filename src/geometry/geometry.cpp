@@ -1,10 +1,10 @@
 #include <algorithm>
 #include <random>
 
-#include "muli/geometry.h"
-#include "muli/hash.h"
+#include "flywheel/geometry.h"
+#include "flywheel/hash.h"
 
-namespace muli
+namespace flywheel
 {
 
 void ComputeConvexHull(const Vec2* vertices, int32 vertexCount, Vec2* outVertices, int32* outVertexCount)
@@ -861,4 +861,4 @@ std::vector<Polygon> ComputeDecomposition(std::span<const std::vector<Vec2>> con
     return res;
 }
 
-} // namespace muli
+} // namespace flywheel
