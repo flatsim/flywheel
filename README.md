@@ -114,3 +114,9 @@ Here are some great resources to learn how to build a physics engine!
 - https://box2d.org/publications/
 - https://www.cs.cmu.edu/~baraff/sigcourse/index.html
 - https://dyn4j.org/blog/
+
+## Acknowledgments
+
+This project is a fork of the amazing [Muli Physics Engine](https://github.com/Sopiro/Muli) by [Sopiro](https://github.com/Sopiro). 
+
+For a full acknowledgment and thank you to the original author, please see [ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md).
