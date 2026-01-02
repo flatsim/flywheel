@@ -426,4 +426,148 @@ inline const WorldSettings& World::GetWorldSettings() const
     return settings;
 }
 
+// BroadPhase inline implementations (defined here after World is complete)
+
+inline BroadPhase::BroadPhase(ContactGraph* contactGraph)
+    : contactGraph{ contactGraph }
+    , moveCapacity{ 16 }
+    , moveCount{ 0 }
+{
+    moveBuffer = (NodeProxy*)flywheel::Alloc(moveCapacity * sizeof(NodeProxy));
+}
+
+inline BroadPhase::~BroadPhase()
+{
+    flywheel::Free(moveBuffer);
+}
+
+inline void BroadPhase::BufferMove(NodeProxy node)
+{
+    // Grow the buffer as needed
+    if (moveCount == moveCapacity)
+    {
+        NodeProxy* old = moveBuffer;
+        moveCapacity *= 2;
+        moveBuffer = (NodeProxy*)flywheel::Alloc(moveCapacity * sizeof(NodeProxy));
+        memcpy(moveBuffer, old, moveCount * sizeof(NodeProxy));
+        flywheel::Free(old);
+    }
+
+    moveBuffer[moveCount] = node;
+    ++moveCount;
+}
+
+inline void BroadPhase::UnBufferMove(NodeProxy node)
+{
+    for (int32 i = 0; i < moveCount; ++i)
+    {
+        if (moveBuffer[i] == node)
+        {
+            moveBuffer[i] = AABBTree::nullNode;
+        }
+    }
+}
+
+inline void BroadPhase::FindNewContacts()
+{
+    for (int32 i = 0; i < moveCount; ++i)
+    {
+        nodeA = moveBuffer[i];
+        if (nodeA == AABBTree::nullNode)
+        {
+            continue;
+        }
+
+        colliderA = tree.GetData(nodeA);
+        bodyA = colliderA->body;
+        typeA = colliderA->GetType();
+
+        const AABB& treeAABB = tree.GetAABB(colliderA->node);
+
+        // This will callback our BroadPhase::QueryCallback(NodeProxy, Collider*)
+        tree.Query(treeAABB, this);
+    }
+
+    // Clear move buffer for next step
+    for (int32 i = 0; i < moveCount; ++i)
+    {
+        NodeProxy node = moveBuffer[i];
+        if (node != AABBTree::nullNode)
+        {
+            tree.ClearMoved(node);
+        }
+    }
+
+    moveCount = 0;
+}
+
+inline void BroadPhase::Add(Collider* collider, const AABB& aabb)
+{
+    NodeProxy node = tree.CreateNode(collider, aabb);
+    collider->node = node;
+
+    BufferMove(node);
+}
+
+inline void BroadPhase::Remove(Collider* collider)
+{
+    NodeProxy node = collider->node;
+    tree.RemoveNode(node);
+
+    UnBufferMove(node);
+}
+
+inline void BroadPhase::Update(Collider* collider, const AABB& aabb, const Vec2& displacement)
+{
+    NodeProxy node = collider->node;
+    bool rested = collider->body->resting > contactGraph->world->settings.sleeping_time;
+
+    bool nodeMoved = tree.MoveNode(node, aabb, displacement, rested);
+    if (nodeMoved)
+    {
+        BufferMove(node);
+    }
+}
+
+inline void BroadPhase::Refresh(Collider* collider)
+{
+    NodeProxy node = collider->node;
+    AABB aabb = collider->GetAABB();
+
+    tree.MoveNode(node, aabb, Vec2::zero, true);
+    BufferMove(node);
+}
+
+inline bool BroadPhase::QueryCallback(NodeProxy nodeB, Collider* colliderB)
+{
+    if (nodeA == nodeB)
+    {
+        return true;
+    }
+
+    RigidBody* bodyB = colliderB->body;
+    if (bodyA == bodyB)
+    {
+        return true;
+    }
+
+    // Avoid duplicate contact
+    if (tree.WasMoved(nodeB) && nodeA < nodeB)
+    {
+        return true;
+    }
+
+    Shape::Type typeB = colliderB->GetType();
+    if (typeA <= typeB)
+    {
+        contactGraph->OnNewContact(colliderB, colliderA);
+    }
+    else
+    {
+        contactGraph->OnNewContact(colliderA, colliderB);
+    }
+
+    return true;
+}
+
 } // namespace flywheel
