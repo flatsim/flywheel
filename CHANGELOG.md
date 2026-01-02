@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.9] - 2026-01-02
+
+### <!-- 0 -->⛰️  Features
+
+- Refactor collision and geometry management
+
+### <!-- 1 -->🐛 Bug Fixes
+
+- Fix `Collider` initialization and destructor
+- Consolidate global variable definitions
+- Refactor `block_solve` and remove debugging
+
 ## [0.0.8] - 2026-01-02
 
 ### <!-- 0 -->⛰️  Features
