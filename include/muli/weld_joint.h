@@ -2,6 +2,7 @@
 
 #include "common.h"
 #include "joint.h"
+#include "math.h"
 
 namespace muli
 {

@@ -2,6 +2,7 @@
 
 #include "common.h"
 #include "growable_array.h"
+#include "math.h"
 #include "simplex.h"
 
 namespace muli

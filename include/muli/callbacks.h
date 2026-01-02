@@ -4,6 +4,7 @@
 #include "common.h"
 #include "contact.h"
 #include "joint.h"
+#include "math.h"
 
 namespace muli
 {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "common.h"
+#include "math.h"
 
 #include "collider.h"
 #include "rigidbody.h"

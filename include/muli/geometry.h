@@ -2,6 +2,7 @@
 
 #include "circle.h"
 #include "common.h"
+#include "math.h"
 #include "polygon.h"
 
 namespace muli

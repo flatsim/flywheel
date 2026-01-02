@@ -3,6 +3,7 @@
 #include "aabb.h"
 #include "aabb_tree.h"
 #include "common.h"
+#include "math.h"
 
 namespace muli
 {

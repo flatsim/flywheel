@@ -18,7 +18,7 @@
 #include <unordered_set>
 #include <vector>
 
-#include "math.h"
+#include "types.h"
 
 #define MuliAssert(A) assert(A)
 #define MuliNotUsed(x) ((void)(x))
