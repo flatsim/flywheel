@@ -1,6 +1,9 @@
 #pragma once
 
+#include "collision.h"
 #include "math.h"
+#include "settings.h"
+#include "simplex.h"
 
 namespace flywheel
 {
