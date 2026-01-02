@@ -4,7 +4,10 @@
 #include "flywheel/circle.h"
 #include "flywheel/collider.h"
 #include "flywheel/contact_graph.h"
+#include "flywheel/island.h"
 #include "flywheel/polygon.h"
+#include "flywheel/rigidbody.h"
+#include "flywheel/time_of_impact.h"
 #include "flywheel/world.h"
 
 namespace flywheel
