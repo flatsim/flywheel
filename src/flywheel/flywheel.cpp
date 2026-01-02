@@ -1138,7 +1138,6 @@ void RigidBody::SynchronizeColliders()
 // World implementation
 // ============================================================================
 
-
 namespace flywheel
 {
 
