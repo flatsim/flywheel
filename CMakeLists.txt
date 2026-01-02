@@ -63,7 +63,7 @@ set(COMMON_FLAGS -Wall -Wextra -Wpedantic -Wno-reorder -Wno-narrowing -Wno-array
     -Wno-unused-variable -Wno-unused-parameter -Wno-unused-but-set-variable -Wno-gnu-line-marker)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    add_compile_options(${COMMON_FLAGS} -Wno-stringop-overflow)
+    add_compile_options(${COMMON_FLAGS} -Wno-stringop-overflow -Wno-maybe-uninitialized -Wno-free-nonheap-object)
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(${COMMON_FLAGS} -Wno-unknown-warning-option)
 else()

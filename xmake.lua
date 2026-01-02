@@ -44,7 +44,8 @@ local COMMON_FLAGS = {
     "-Wall", "-Wextra", "-Wpedantic",
     "-Wno-reorder", "-Wno-narrowing", "-Wno-array-bounds",
     "-Wno-unused-variable", "-Wno-unused-parameter",
-    "-Wno-unused-but-set-variable", "-Wno-gnu-line-marker", "-Wno-comment"
+    "-Wno-unused-but-set-variable", "-Wno-gnu-line-marker", "-Wno-comment",
+    "-Wno-maybe-uninitialized", "-Wno-free-nonheap-object"
 }
 
 -- Add common flags

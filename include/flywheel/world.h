@@ -601,7 +601,10 @@ inline ContactListener defaultListener;
 inline Collider::Collider()
     : OnDestroy{ nullptr }
     , ContactListener{ &defaultListener }
+    , body{ nullptr }
     , next{ nullptr }
+    , shape{ nullptr }
+    , density{ 0.0f }
     , node{ AABBTree::nullNode }
     , enabled{ true }
 {
@@ -630,9 +633,15 @@ inline void Collider::Create(
 
 inline void Collider::Destroy(Allocator* allocator)
 {
+    if (shape == nullptr)
+    {
+        return;
+    }
+
+    Shape::Type type = shape->GetType();
     shape->~Shape();
 
-    switch (shape->GetType())
+    switch (type)
     {
     case Shape::Type::circle:
         allocator->Free(shape, sizeof(Circle));
