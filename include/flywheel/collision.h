@@ -1,6 +1,11 @@
 #pragma once
 
+#include "capsule.h"
+#include "circle.h"
+#include "polygon.h"
+#include "polytope.h"
 #include "settings.h"
+#include "shape.h"
 #include "simplex.h"
 
 /*

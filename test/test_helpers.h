@@ -2,6 +2,7 @@
 
 #include <doctest/doctest.h>
 #include <flywheel/math.h>
+#include <flywheel/world.h>
 #include <cmath>
 #include <limits>
 

@@ -79,12 +79,12 @@ private:
     );
     void Destroy(Allocator* allocator);
 
-    RigidBody* body;
-    Collider* next;
+    RigidBody* body = nullptr;
+    Collider* next = nullptr;
 
-    Shape* shape;
+    Shape* shape = nullptr;
 
-    float density;
+    float density = 0.0f;
 
     Material material;
     CollisionFilter filter;
