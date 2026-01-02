@@ -11,7 +11,7 @@ struct Timestep;
 class Constraint
 {
 public:
-    Constraint(RigidBody* bodyA, RigidBody* bodyB);
+    inline Constraint(RigidBody* bodyA, RigidBody* bodyB);
     virtual ~Constraint() = default;
 
     Constraint(const Constraint&) = delete;
@@ -63,6 +63,15 @@ inline RigidBody* Constraint::GetBodyA() const
 inline RigidBody* Constraint::GetBodyB() const
 {
     return bodyB;
+}
+
+inline Constraint::Constraint(RigidBody* bodyA, RigidBody* bodyB)
+    : bodyA{ bodyA }
+    , bodyB{ bodyB }
+    , beta{ 0.0f }
+    , gamma{ 0.0f }
+{
+    MuliAssert(bodyA->GetWorld() == bodyB->GetWorld());
 }
 
 } // namespace flywheel
