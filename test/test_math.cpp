@@ -1,5 +1,5 @@
 #include "test_helpers.h"
-#include <flywheel/math.h>
+#include <flywheel/flywheel.hpp>
 
 using namespace flywheel;
 using namespace flywheel::test;

@@ -1,8 +1,5 @@
 #include "test_helpers.h"
-#include <flywheel/joint.h>
-#include <flywheel/rigidbody.h>
-#include <flywheel/settings.h>
-#include <flywheel/world.h>
+#include <flywheel/flywheel.hpp>
 
 using namespace flywheel;
 using namespace flywheel::test;

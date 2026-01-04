@@ -1,7 +1,5 @@
 #include "test_helpers.h"
-#include <flywheel/circle.h>
-#include <flywheel/polygon.h>
-#include <flywheel/capsule.h>
+#include <flywheel/flywheel.hpp>
 
 using namespace flywheel;
 using namespace flywheel::test;

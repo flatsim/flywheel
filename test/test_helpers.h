@@ -1,8 +1,7 @@
 #pragma once
 
 #include <doctest/doctest.h>
-#include <flywheel/math.h>
-#include <flywheel/world.h>
+#include <flywheel/flywheel.hpp>
 #include <cmath>
 #include <limits>
 
