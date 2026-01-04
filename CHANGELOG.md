@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.0.10] - 2026-01-04
+
+### <!-- 0 -->⛰️  Features
+
+- Reorganize library headers into subdirectories
+
 ## [0.0.9] - 2026-01-02
 
 ### <!-- 0 -->⛰️  Features
