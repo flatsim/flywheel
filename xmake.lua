@@ -2,7 +2,7 @@
 -- NOTE: Due to xmake description domain limitations, PROJECT_NAME must be hardcoded
 --       and kept in sync with the NAME file. The VERSION is read dynamically.
 local PROJECT_NAME = "flywheel"
-local PROJECT_VERSION = "0.0.3"
+local PROJECT_VERSION = "0.0.10"
 
 -- Dependencies formats:
 --   Git:    {"name", "https://github.com/org/repo.git", "tag"}
@@ -44,7 +44,8 @@ local COMMON_FLAGS = {
     "-Wall", "-Wextra", "-Wpedantic",
     "-Wno-reorder", "-Wno-narrowing", "-Wno-array-bounds",
     "-Wno-unused-variable", "-Wno-unused-parameter",
-    "-Wno-unused-but-set-variable", "-Wno-gnu-line-marker", "-Wno-comment"
+    "-Wno-unused-but-set-variable", "-Wno-gnu-line-marker", "-Wno-comment",
+    "-Wno-maybe-uninitialized", "-Wno-free-nonheap-object"
 }
 
 -- Add common flags

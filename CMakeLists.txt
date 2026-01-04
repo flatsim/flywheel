@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.15)
 # Project configuration
 # ==================================================================================================
 set(PROJECT_NAME flywheel)
-set(PROJECT_VERSION "0.0.3")
+set(PROJECT_VERSION "0.0.10")
 
 # Dependencies formats:
 #   Git:    set(LIB_DEPS "name|https://github.com/org/repo.git|tag" ...)
@@ -63,7 +63,7 @@ set(COMMON_FLAGS -Wall -Wextra -Wpedantic -Wno-reorder -Wno-narrowing -Wno-array
     -Wno-unused-variable -Wno-unused-parameter -Wno-unused-but-set-variable -Wno-gnu-line-marker)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    add_compile_options(${COMMON_FLAGS} -Wno-stringop-overflow)
+    add_compile_options(${COMMON_FLAGS} -Wno-stringop-overflow -Wno-maybe-uninitialized -Wno-free-nonheap-object)
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(${COMMON_FLAGS} -Wno-unknown-warning-option)
 else()
@@ -144,7 +144,7 @@ process_deps(LIB_DEPS LIB_DEP_TARGETS)
 # ==================================================================================================
 # Main library
 # ==================================================================================================
-file(GLOB_RECURSE LIB_SOURCES CONFIGURE_DEPENDS "src/${PROJECT_NAME}/*.cpp")
+file(GLOB_RECURSE LIB_SOURCES CONFIGURE_DEPENDS "src/**/*.cpp")
 
 if(LIB_SOURCES)
     add_library(${PROJECT_NAME} STATIC ${LIB_SOURCES})
